@@ -34,8 +34,10 @@ public class UsernamePasswordToken extends org.apache.shiro.authc.UsernamePasswo
 		this.captcha = captcha;
 	}
 
+	// 20191016 ctc
 	public boolean isMobileLogin() {
-		return mobileLogin;
+		//return mobileLogin;
+		return false;
 	}
 	
 }
