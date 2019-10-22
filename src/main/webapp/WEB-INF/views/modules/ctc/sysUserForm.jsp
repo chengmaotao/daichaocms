@@ -57,7 +57,7 @@
 			<div class="controls">
 				<%--<form:input path="password" htmlEscape="false" maxlength="100" class="input-xlarge required"/>
 				<span class="help-inline"><font color="red">*</font> </span>--%>
-				<input id="password" name="password" type="password" class="input-xlarge"/>
+				<input id="newPassword" name="newPassword" type="password" class="input-xlarge"/>
 					<span class="help-inline"><font color="red">添加时 如果输入为空 密码则为 123456</font> </span>
 			</div>
 		</div>
@@ -74,8 +74,14 @@
         <div class="control-group">
             <label class="control-label">渠道ID:</label>
             <div class="controls">
-                <form:input path="no" htmlEscape="false" maxlength="50" class="input-xlarge required"/>
-                <span class="help-inline"><font color="red">*</font> </span>
+<%--                <form:input path="no" htmlEscape="false" maxlength="50" class="input-xlarge required"/>
+                <span class="help-inline"><font color="red">*</font> </span>--%>
+
+				<form:select path="no" class="input-xlarge required">
+					<form:option value="" label="请选择"/>
+					<form:options items="${fns:getCtcChannelList()}" itemLabel="channelName" itemValue="channelId" htmlEscape="false"/>
+				</form:select>
+				<span class="help-inline"><font color="red">*</font> </span>
             </div>
         </div>
 

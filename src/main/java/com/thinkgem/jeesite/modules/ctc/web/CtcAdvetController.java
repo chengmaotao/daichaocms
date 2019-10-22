@@ -34,7 +34,7 @@ public class CtcAdvetController extends BaseController {
 
 	@Autowired
 	private CtcAdvetService ctcAdvetService;
-	
+
 	@ModelAttribute
 	public CtcAdvet get(@RequestParam(required=false) String id) {
 		CtcAdvet entity = null;
@@ -46,11 +46,11 @@ public class CtcAdvetController extends BaseController {
 		}
 		return entity;
 	}
-	
+
 	@RequiresPermissions("ctc:ctcAdvet:view")
 	@RequestMapping(value = {"list", ""})
 	public String list(CtcAdvet ctcAdvet, HttpServletRequest request, HttpServletResponse response, Model model) {
-		Page<CtcAdvet> page = ctcAdvetService.findPage(new Page<CtcAdvet>(request, response), ctcAdvet); 
+		Page<CtcAdvet> page = ctcAdvetService.findPage(new Page<CtcAdvet>(request, response), ctcAdvet);
 		model.addAttribute("page", page);
 		return "modules/ctc/ctcAdvetList";
 	}
@@ -72,7 +72,7 @@ public class CtcAdvetController extends BaseController {
 		addMessage(redirectAttributes, "保存广告轮播图成功");
 		return "redirect:"+Global.getAdminPath()+"/ctc/ctcAdvet/?repage";
 	}
-	
+
 	@RequiresPermissions("ctc:ctcAdvet:edit")
 	@RequestMapping(value = "delete")
 	public String delete(CtcAdvet ctcAdvet, RedirectAttributes redirectAttributes) {

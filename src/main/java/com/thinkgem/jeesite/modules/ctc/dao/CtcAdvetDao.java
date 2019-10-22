@@ -10,7 +10,7 @@ import com.thinkgem.jeesite.modules.ctc.entity.CtcAdvet;
 /**
  * 广告轮播图管理DAO接口
  * @author 成茂涛
- * @version 2019-10-19
+ * @version 2019-10-21
  */
 @MyBatisDao
 public interface CtcAdvetDao extends CrudDao<CtcAdvet> {

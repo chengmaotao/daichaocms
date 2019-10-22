@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.ctc.dao.CtcUserDao">
+    
+	<sql id="ctcUserColumns">
+		a.id AS "id",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		a.user_id AS "userId",
+		a.user_name AS "userName",
+		a.user_sfz AS "userSfz",
+		a.user_phone AS "userPhone",
+		a.channel_id AS "channelId",
+		a.user_state AS "userState",
+		a.user_real_name_time AS "userRealNameTime"
+	</sql>
+
+    
+	<select id="get" resultType="CtcUser">
+		SELECT 
+			<include refid="ctcUserColumns"/>
+		FROM ctc_user a
+		WHERE a.id = #{id}
+	</select>
+
+
+	<select id="findCountNum" resultType="java.lang.Integer">
+		select count(*)
+		FROM ctc_user a
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="endDate != null and endDate != ''">
+				AND a.create_date &lt;= #{endDate}
+			</if>
+
+			<if test="beginDate != null and beginDate != ''">
+				AND a.create_date &gt;= #{beginDate}
+			</if>
+
+			<if test="channelId != null and channelId != ''">
+				AND a.channel_id = #{channelId}
+			</if>
+		</where>
+	</select>
+
+	
+	<select id="findList" resultType="CtcUser">
+	SELECT
+	<include refid="ctcUserColumns"/>
+	FROM ctc_user a
+	<where>
+		a.del_flag = #{DEL_FLAG_NORMAL}
+		<if test="endDate != null and endDate != ''">
+			AND a.create_date &lt;= #{endDate}
+		</if>
+
+		<if test="beginDate != null and beginDate != ''">
+			AND a.create_date &gt;= #{beginDate}
+		</if>
+
+		<if test="channelId != null and channelId != ''">
+			AND a.channel_id = #{channelId}
+		</if>
+	</where>
+	<choose>
+		<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+			ORDER BY ${page.orderBy}
+		</when>
+		<otherwise>
+			ORDER BY a.create_date
+		</otherwise>
+	</choose>
+</select>
+
+
+
+	<select id="findkl1List" resultType="CtcUser">
+		SELECT
+		<include refid="ctcUserColumns"/>
+		FROM ctc_user a
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="endDate != null and endDate != ''">
+				AND a.create_date &lt;= #{endDate}
+			</if>
+
+			<if test="beginDate != null and beginDate != ''">
+				AND a.create_date &gt;= #{beginDate}
+			</if>
+
+			<if test="channelId != null and channelId != ''">
+				AND a.channel_id = #{channelId}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.create_date
+			</otherwise>
+		</choose>
+		limit 0,${bklNum}
+	</select>
+
+
+	<select id="findkl2List" resultType="CtcUser">
+		SELECT
+		<include refid="ctcUserColumns"/>
+		FROM ctc_user a
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="endDate != null and endDate != ''">
+				AND a.create_date &lt;= #{endDate}
+			</if>
+
+			<if test="beginDate != null and beginDate != ''">
+				AND a.create_date &gt;= #{beginDate}
+			</if>
+
+			<if test="channelId != null and channelId != ''">
+				AND a.channel_id = #{channelId}
+			</if>
+
+			<if test="exUsers != null and exUsers.size > 0">
+				AND a.id not in
+				<foreach collection="exUsers" item="exUser" open="(" separator="," close=")">
+					#{exUser.id}
+				</foreach>
+			</if>
+
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.user_id
+			</otherwise>
+		</choose>
+		limit ${bklNum},${jsendLength}
+	</select>
+
+	
+	<select id="findAllList" resultType="CtcUser">
+		SELECT 
+			<include refid="ctcUserColumns"/>
+		FROM ctc_user a
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO ctc_user(
+			id,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag,
+			user_id,
+			user_name,
+			user_sfz,
+			user_phone,
+			channel_id,
+			user_state,
+			user_real_name_time
+		) VALUES (
+			#{id},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag},
+			#{userId},
+			#{userName},
+			#{userSfz},
+			#{userPhone},
+			#{channelId},
+			#{userState},
+			#{userRealNameTime}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE ctc_user SET 	
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			user_id = #{userId},
+			user_name = #{userName},
+			user_sfz = #{userSfz},
+			user_phone = #{userPhone},
+			channel_id = #{channelId},
+			user_state = #{userState},
+			user_real_name_time = #{userRealNameTime}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE ctc_user SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

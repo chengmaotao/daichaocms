@@ -11,17 +11,19 @@ import com.thinkgem.jeesite.common.persistence.DataEntity;
 /**
  * 广告轮播图管理Entity
  * @author 成茂涛
- * @version 2019-10-19
+ * @version 2019-10-21
  */
 public class CtcAdvet extends DataEntity<CtcAdvet> {
 	
 	private static final long serialVersionUID = 1L;
 	private String advetUrl;		// 广告图片地址
-	private String advetJumpUrl;		// 广告图片跳转地址
-
 	private String voAdvetUrl;
 
+	private String advetJumpUrl;		// 广告图片跳转地址
+	private String productId;		// 跳转的产品id
+
 	public String getVoAdvetUrl() {
+		//return voAdvetUrl;
 		return new StringBuffer("").append(Global.getConfig("ctc.http.pref")).append(Global.getConfig("ctc.upload.file.path")).append(advetUrl).toString();
 	}
 
@@ -53,6 +55,15 @@ public class CtcAdvet extends DataEntity<CtcAdvet> {
 
 	public void setAdvetJumpUrl(String advetJumpUrl) {
 		this.advetJumpUrl = advetJumpUrl;
+	}
+	
+	@Length(min=1, max=32, message="跳转的产品id长度必须介于 1 和 32 之间")
+	public String getProductId() {
+		return productId;
+	}
+
+	public void setProductId(String productId) {
+		this.productId = productId;
 	}
 	
 }

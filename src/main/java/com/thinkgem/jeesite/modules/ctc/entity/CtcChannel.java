@@ -10,7 +10,7 @@ import com.thinkgem.jeesite.common.persistence.DataEntity;
 /**
  * 渠道管理Entity
  * @author 成茂涛
- * @version 2019-10-19
+ * @version 2019-10-21
  */
 public class CtcChannel extends DataEntity<CtcChannel> {
 	
@@ -18,6 +18,7 @@ public class CtcChannel extends DataEntity<CtcChannel> {
 	private String channelId;		// channel_id
 	private String channelName;		// 渠道名称
 	private String deduProportion;		// 结算比例 除以 100，（例如 写60的话，就是 100个人给结算60个）
+	private String deduQuanNum;		// 数目低于多少个时不扣量
 	
 	public CtcChannel() {
 		super();
@@ -52,6 +53,15 @@ public class CtcChannel extends DataEntity<CtcChannel> {
 
 	public void setDeduProportion(String deduProportion) {
 		this.deduProportion = deduProportion;
+	}
+	
+	@Length(min=1, max=11, message="数目低于多少个时不扣量长度必须介于 1 和 11 之间")
+	public String getDeduQuanNum() {
+		return deduQuanNum;
+	}
+
+	public void setDeduQuanNum(String deduQuanNum) {
+		this.deduQuanNum = deduQuanNum;
 	}
 	
 }

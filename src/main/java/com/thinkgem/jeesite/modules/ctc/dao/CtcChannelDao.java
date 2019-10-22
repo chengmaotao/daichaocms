@@ -10,9 +10,10 @@ import com.thinkgem.jeesite.modules.ctc.entity.CtcChannel;
 /**
  * 渠道管理DAO接口
  * @author 成茂涛
- * @version 2019-10-19
+ * @version 2019-10-21
  */
 @MyBatisDao
 public interface CtcChannelDao extends CrudDao<CtcChannel> {
-	
+
+    CtcChannel getCtcChannelById(String channelId);
 }

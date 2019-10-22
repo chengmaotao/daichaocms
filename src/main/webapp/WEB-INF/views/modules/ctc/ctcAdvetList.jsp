@@ -35,6 +35,7 @@
 			<tr>
 				<th>轮播图</th>
 				<th>跳转地址</th>
+				<th>产品ID</th>
 
 				<th>更新时间</th>
 				<th>备注信息</th>
@@ -51,6 +52,10 @@
 
 				<td>
 						${ctcAdvet.advetJumpUrl}
+				</td>
+
+				<td>
+						${ctcAdvet.productId}
 				</td>
 
 				<td><a href="${ctx}/ctc/ctcAdvet/form?id=${ctcAdvet.id}">

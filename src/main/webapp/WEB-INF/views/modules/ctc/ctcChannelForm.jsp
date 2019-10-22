@@ -55,6 +55,14 @@
 		</div>
 
 		<div class="control-group">
+			<label class="control-label">阈值（低于多少个时不扣量）：</label>
+			<div class="controls">
+				<form:input path="deduQuanNum" htmlEscape="false" maxlength="11" class="input-xlarge required"/>
+				<span class="help-inline"><font color="red">* （例如 写10的话，就是 前10个人进来不扣量）</font> </span>
+			</div>
+		</div>
+
+		<div class="control-group">
 			<label class="control-label">备注信息：</label>
 			<div class="controls">
 				<form:textarea path="remarks" htmlEscape="false" rows="4" maxlength="255" class="input-xxlarge "/>
