@@ -243,5 +243,32 @@
     <function-signature>java.lang.String toJsonString(java.lang.Object)</function-signature>
     <example>${fns:toJson(object)}</example>  
   </function>
+
+
+
+  <function>
+    <description>获取ctc贷超产品分类列表</description>
+    <name>getProductCategoryList</name>
+    <function-class>com.thinkgem.jeesite.modules.ctc.utils.CtcUtils</function-class>
+    <function-signature>java.util.List getProductCategoryList()</function-signature>
+    <example>${fns:getProductCategoryList()}</example>
+  </function>
+
+
+  <function>
+    <description>获取ctc导流渠道列表</description>
+    <name>getCtcChannelList</name>
+    <function-class>com.thinkgem.jeesite.modules.ctc.utils.CtcUtils</function-class>
+    <function-signature>java.util.List getCtcChannelList()</function-signature>
+    <example>${fns:getCtcChannelList()}</example>
+  </function>
+
+  <function>
+    <description>根据渠道号获得渠道对象</description>
+    <name>getCtcChannelById</name>
+    <function-class>com.thinkgem.jeesite.modules.ctc.utils.CtcUtils</function-class>
+    <function-signature>com.thinkgem.jeesite.modules.ctc.entity.CtcChannel getCtcChannelById(java.lang.String)</function-signature>
+    <example>${fns:getCtcChannelById(id)}</example>
+  </function>
   
 </taglib>

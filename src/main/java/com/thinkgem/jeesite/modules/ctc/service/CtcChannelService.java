@@ -16,7 +16,7 @@ import com.thinkgem.jeesite.modules.ctc.dao.CtcChannelDao;
 /**
  * 渠道管理Service
  * @author 成茂涛
- * @version 2019-10-19
+ * @version 2019-10-21
  */
 @Service
 @Transactional(readOnly = true)

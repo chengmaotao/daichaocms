@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.thinkgem.jeesite.modules.ctc.dao.CtcAdvetDao">
+<mapper namespace="com.thinkgem.jeesite.modules.ctc.dao.CtcStrikingDao">
     
-	<sql id="ctcAdvetColumns">
+	<sql id="ctcStrikingColumns">
 		a.id AS "id",
 		a.create_by AS "createBy.id",
 		a.create_date AS "createDate",
@@ -10,29 +10,33 @@
 		a.update_date AS "updateDate",
 		a.remarks AS "remarks",
 		a.del_flag AS "delFlag",
-		a.advet_url AS "advetUrl",
-		a.advet_jump_url AS "advetJumpUrl",
-		a.product_id AS "productId"
+		a.title AS "title"
 	</sql>
 	
-	<sql id="ctcAdvetJoins">
+	<sql id="ctcStrikingJoins">
 	</sql>
     
-	<select id="get" resultType="CtcAdvet">
+	<select id="get" resultType="CtcStriking">
 		SELECT 
-			<include refid="ctcAdvetColumns"/>
-		FROM ctc_advet a
-		<include refid="ctcAdvetJoins"/>
+			<include refid="ctcStrikingColumns"/>
+		FROM ctc_striking a
+		<include refid="ctcStrikingJoins"/>
 		WHERE a.id = #{id}
 	</select>
 	
-	<select id="findList" resultType="CtcAdvet">
+	<select id="findList" resultType="CtcStriking">
 		SELECT 
-			<include refid="ctcAdvetColumns"/>
-		FROM ctc_advet a
-		<include refid="ctcAdvetJoins"/>
+			<include refid="ctcStrikingColumns"/>
+		FROM ctc_striking a
+		<include refid="ctcStrikingJoins"/>
 		<where>
 			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="title != null and title != ''">
+				AND a.title LIKE 
+					<if test="dbName == 'oracle'">'%'||#{title}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{title}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{title},'%')</if>
+			</if>
 		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
@@ -44,11 +48,11 @@
 		</choose>
 	</select>
 	
-	<select id="findAllList" resultType="CtcAdvet">
+	<select id="findAllList" resultType="CtcStriking">
 		SELECT 
-			<include refid="ctcAdvetColumns"/>
-		FROM ctc_advet a
-		<include refid="ctcAdvetJoins"/>
+			<include refid="ctcStrikingColumns"/>
+		FROM ctc_striking a
+		<include refid="ctcStrikingJoins"/>
 		<where>
 			a.del_flag = #{DEL_FLAG_NORMAL}
 		</where>		
@@ -63,7 +67,7 @@
 	</select>
 	
 	<insert id="insert">
-		INSERT INTO ctc_advet(
+		INSERT INTO ctc_striking(
 			id,
 			create_by,
 			create_date,
@@ -71,9 +75,7 @@
 			update_date,
 			remarks,
 			del_flag,
-			advet_url,
-			advet_jump_url,
-			product_id
+			title
 		) VALUES (
 			#{id},
 			#{createBy.id},
@@ -82,25 +84,21 @@
 			#{updateDate},
 			#{remarks},
 			#{delFlag},
-			#{advetUrl},
-			#{advetJumpUrl},
-			#{productId}
+			#{title}
 		)
 	</insert>
 	
 	<update id="update">
-		UPDATE ctc_advet SET 	
+		UPDATE ctc_striking SET 	
 			update_by = #{updateBy.id},
 			update_date = #{updateDate},
 			remarks = #{remarks},
-			advet_url = #{advetUrl},
-			advet_jump_url = #{advetJumpUrl},
-			product_id = #{productId}
+			title = #{title}
 		WHERE id = #{id}
 	</update>
 	
 	<update id="delete">
-		UPDATE ctc_advet SET 
+		UPDATE ctc_striking SET 
 			del_flag = #{DEL_FLAG_DELETE}
 		WHERE id = #{id}
 	</update>

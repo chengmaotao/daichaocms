@@ -48,13 +48,16 @@ public class SysUserService extends CrudService<SysUserDao, SysUser> {
 	public void save(SysUser sysUser) {
 
 		if (sysUser.getIsNewRecord()){
-			sysUser.setPassword(SystemService.entryptPassword(StringUtils.isEmpty(sysUser.getPassword()) ? "123456" : sysUser.getPassword()));
+			sysUser.setPassword(SystemService.entryptPassword(StringUtils.isEmpty(sysUser.getNewPassword()) ? "123456" : sysUser.getNewPassword()));
 
 			sysUser.preInsert();
 			dao.insert(sysUser);
 			sysUserDao.insertUserRole(sysUser);
 
 		}else{
+			if(StringUtils.isNotEmpty(sysUser.getNewPassword())){
+				sysUser.setPassword(SystemService.entryptPassword(sysUser.getNewPassword()));
+			}
 
 			sysUser.preUpdate();
 			dao.update(sysUser);

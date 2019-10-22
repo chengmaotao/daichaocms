@@ -36,6 +36,16 @@ public class SysUser extends DataEntity<SysUser> {
 
 	private String roleId;
 
+	private String newPassword;
+
+	public String getNewPassword() {
+		return newPassword;
+	}
+
+	public void setNewPassword(String newPassword) {
+		this.newPassword = newPassword;
+	}
+
 	public String getRoleId() {
 		return roleId;
 	}

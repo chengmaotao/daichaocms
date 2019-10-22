@@ -5,15 +5,14 @@ package com.thinkgem.jeesite.modules.ctc.dao;
 
 import com.thinkgem.jeesite.common.persistence.CrudDao;
 import com.thinkgem.jeesite.common.persistence.annotation.MyBatisDao;
-import com.thinkgem.jeesite.modules.ctc.entity.CtcPrroductCategory;
+import com.thinkgem.jeesite.modules.ctc.entity.CtcStriking;
 
 /**
- * 产品类别管理DAO接口
+ * 醒目文案管理DAO接口
  * @author 成茂涛
- * @version 2019-10-19
+ * @version 2019-10-21
  */
 @MyBatisDao
-public interface CtcPrroductCategoryDao extends CrudDao<CtcPrroductCategory> {
-
-    CtcPrroductCategory getProductCategoryById(String pcid);
+public interface CtcStrikingDao extends CrudDao<CtcStriking> {
+	
 }

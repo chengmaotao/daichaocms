@@ -36,6 +36,9 @@
 				<th>渠道ID</th>
 				<th>渠道名称</th>
 				<th>结算比例(%)</th>
+
+				<th>阈值（低于多少个时不扣量）</th>
+
 				<th>更新时间</th>
 				<th>备注信息</th>
 				<shiro:hasPermission name="ctc:ctcChannel:edit"><th>操作</th></shiro:hasPermission>
@@ -55,6 +58,10 @@
 
 				<td>
 						${ctcChannel.deduProportion}
+				</td>
+
+				<td>
+						${ctcChannel.deduQuanNum}
 				</td>
 
 				<td><a href="${ctx}/ctc/ctcChannel/form?id=${ctcChannel.id}">

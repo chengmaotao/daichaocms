@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.ctc.dao.CtcProductDao">
+    
+	<sql id="ctcProductColumns">
+		a.id AS "id",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		a.product_id AS "productId",
+		a.product_category_id AS "productCategoryId",
+		a.product_name AS "productName",
+		a.logo AS "logo",
+		a.quota AS "quota",
+		a.rate AS "rate",
+		a.ctc_describe AS "ctcDescribe",
+		a.details_describe AS "detailsDescribe",
+		a.apply_nums AS "applyNums",
+		a.fastest_loan_time AS "fastestLoanTime",
+		a.success_rate AS "successRate",
+		a.quota_range AS "quotaRange",
+		a.term_range AS "termRange",
+		a.date_rate AS "dateRate",
+		a.apply_process AS "applyProcess",
+		a.apply_condition AS "applyCondition",
+		a.apply_material AS "applyMaterial",
+		a.new_product AS "newProduct"
+	</sql>
+	
+	<sql id="ctcProductJoins">
+	</sql>
+    
+	<select id="get" resultType="CtcProduct">
+		SELECT 
+			<include refid="ctcProductColumns"/>
+		FROM ctc_product a
+		<include refid="ctcProductJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="CtcProduct">
+		SELECT 
+			<include refid="ctcProductColumns"/>
+		FROM ctc_product a
+		<include refid="ctcProductJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="CtcProduct">
+		SELECT 
+			<include refid="ctcProductColumns"/>
+		FROM ctc_product a
+		<include refid="ctcProductJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO ctc_product(
+			id,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag,
+			product_id,
+			product_category_id,
+			product_name,
+			logo,
+			quota,
+			rate,
+			ctc_describe,
+			details_describe,
+			apply_nums,
+			fastest_loan_time,
+			success_rate,
+			quota_range,
+			term_range,
+			date_rate,
+			apply_process,
+			apply_condition,
+			apply_material,
+			new_product
+		) VALUES (
+			#{id},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag},
+			#{productId},
+			#{productCategoryId},
+			#{productName},
+			#{logo},
+			#{quota},
+			#{rate},
+			#{ctcDescribe},
+			#{detailsDescribe},
+			#{applyNums},
+			#{fastestLoanTime},
+			#{successRate},
+			#{quotaRange},
+			#{termRange},
+			#{dateRate},
+			#{applyProcess},
+			#{applyCondition},
+			#{applyMaterial},
+			#{newProduct}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE ctc_product SET 	
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			product_id = #{productId},
+			product_category_id = #{productCategoryId},
+			product_name = #{productName},
+			logo = #{logo},
+			quota = #{quota},
+			rate = #{rate},
+			ctc_describe = #{ctcDescribe},
+			details_describe = #{detailsDescribe},
+			apply_nums = #{applyNums},
+			fastest_loan_time = #{fastestLoanTime},
+			success_rate = #{successRate},
+			quota_range = #{quotaRange},
+			term_range = #{termRange},
+			date_rate = #{dateRate},
+			apply_process = #{applyProcess},
+			apply_condition = #{applyCondition},
+			apply_material = #{applyMaterial},
+			new_product = #{newProduct}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE ctc_product SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

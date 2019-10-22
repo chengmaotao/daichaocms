@@ -12,7 +12,8 @@
 		a.del_flag AS "delFlag",
 		a.channel_id AS "channelId",
 		a.channel_name AS "channelName",
-		a.dedu_proportion AS "deduProportion"
+		a.dedu_proportion AS "deduProportion",
+		a.dedu_quan_num AS "deduQuanNum"
 	</sql>
 	
 	<sql id="ctcChannelJoins">
@@ -24,6 +25,16 @@
 		FROM ctc_channel a
 		<include refid="ctcChannelJoins"/>
 		WHERE a.id = #{id}
+	</select>
+
+
+
+	<select id="getCtcChannelById" resultType="CtcChannel">
+		SELECT
+		<include refid="ctcChannelColumns"/>
+		FROM ctc_channel a
+		<include refid="ctcChannelJoins"/>
+		WHERE a.channel_id = #{id}
 	</select>
 	
 	<select id="findList" resultType="CtcChannel">
@@ -73,7 +84,8 @@
 			del_flag,
 			channel_id,
 			channel_name,
-			dedu_proportion
+			dedu_proportion,
+			dedu_quan_num
 		) VALUES (
 			#{id},
 			#{createBy.id},
@@ -84,7 +96,8 @@
 			#{delFlag},
 			#{channelId},
 			#{channelName},
-			#{deduProportion}
+			#{deduProportion},
+			#{deduQuanNum}
 		)
 	</insert>
 	
@@ -95,7 +108,8 @@
 			remarks = #{remarks},
 			channel_id = #{channelId},
 			channel_name = #{channelName},
-			dedu_proportion = #{deduProportion}
+			dedu_proportion = #{deduProportion},
+			dedu_quan_num = #{deduQuanNum}
 		WHERE id = #{id}
 	</update>
 	

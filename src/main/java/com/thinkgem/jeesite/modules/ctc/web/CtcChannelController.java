@@ -25,7 +25,7 @@ import com.thinkgem.jeesite.modules.ctc.service.CtcChannelService;
 /**
  * 渠道管理Controller
  * @author 成茂涛
- * @version 2019-10-19
+ * @version 2019-10-21
  */
 @Controller
 @RequestMapping(value = "${adminPath}/ctc/ctcChannel")

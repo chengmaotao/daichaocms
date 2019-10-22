@@ -25,6 +25,15 @@
 		<include refid="ctcPrroductCategoryJoins"/>
 		WHERE a.id = #{id}
 	</select>
+
+
+	<select id="getProductCategoryById" resultType="CtcPrroductCategory">
+		SELECT
+		<include refid="ctcPrroductCategoryColumns"/>
+		FROM ctc_prroduct_category a
+		<include refid="ctcPrroductCategoryJoins"/>
+		WHERE a.product_category_id = #{pcid}
+	</select>
 	
 	<select id="findList" resultType="CtcPrroductCategory">
 		SELECT 
